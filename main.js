@@ -43,6 +43,11 @@ const createText = () => {
      //誤タイプの場合
      if(e.key !== untyped.substring(0,1)){
          wrap.classList.add('mistyped');
+         //100ms後に赤背景を消す
+         setTimeout(()=>{
+             wrap.classList.remove('mistyped');
+         },100);
+         
          return;
      }
      
