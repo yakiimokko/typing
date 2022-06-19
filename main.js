@@ -5,6 +5,7 @@ let typed = '';
 //必要なHTML要素の取得
 const untypedfield = document.getElementById('untyped');
 const typedfield = document.getElementById('typed');
+const wrap = document.getElementById('wrap')
 
 //複数のテキストを格納する配列
 const textLists = [
@@ -38,6 +39,14 @@ createText();
 
 //キー入力の判定
  const keyPress = e => {
+     //誤タイプの場合
+     if(e.key !== untyped.substring(0,1)){
+         wrap.classList.add('mistyped');
+         return;
+     }
+     
+     //正タイプの場合
+     wrap.classList.remove('mistyped');
      typed += untyped.substring(0,1);
      untyped = untyped.substring(1);
      typedfield.textContent = typed;
