@@ -1,6 +1,7 @@
 //変数の初期化
 let untyped = '';
 let typed = '';
+let score = 0;
 
 //必要なHTML要素の取得
 const untypedfield = document.getElementById('untyped');
@@ -52,6 +53,8 @@ const createText = () => {
      }
      
      //正タイプの場合
+     //スコアのインクリメント
+     score++;
      wrap.classList.remove('mistyped');
      typed += untyped.substring(0,1);
      untyped = untyped.substring(1);
@@ -65,10 +68,26 @@ const createText = () => {
  };
 
 //タイピングスキルのランクを判定
-const rankCheck = score => {};
+const rankCheck = score => {
+    let text = '';
+    if(score < 100){
+        text = `あなたのランクはCです。\nBランクまであと${100-score}文字です。`;
+        }else if(score <200 ){
+            text = `あなたのランクはです。\nランクまであと${score}文字です。`
+        }else if(score <300 ){
+            text = `あなたのランクはです。\nランクまであと${score}文字です。`
+        }else if(score >=300 ){
+            text = `あなたのランクはです。\nランクまであと${score}文字です。`
+        }
+        return `${score}文字打てました!\n${text}\n【OK】リトライ / 【キャンセル】終了`;
+    };
 
 //ゲーム終了
-const gameOver = id => {};
+const gameOver = id => {
+    clearInterval(id);
+    const result = confirm(rankCheck(score));
+    if (result == true){window.location.reload()};
+};
 
 //カウントダウンタイマー
 const timer = () => {
@@ -76,7 +95,7 @@ const timer = () => {
     
     const id = setInterval(() => {
         if(time<=0){
-            clearInterval(id);
+            gameOver(id);
         }
     count.textContent = time--;
     },1000);
