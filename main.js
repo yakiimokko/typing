@@ -5,7 +5,9 @@ let typed = '';
 //必要なHTML要素の取得
 const untypedfield = document.getElementById('untyped');
 const typedfield = document.getElementById('typed');
-const wrap = document.getElementById('wrap')
+const wrap = document.getElementById('wrap');
+const start = document.getElementById('start');
+const count = document.getElementById('count');
 
 //複数のテキストを格納する配列
 const textLists = [
@@ -34,7 +36,6 @@ const createText = () => {
     untyped = textLists[random];
     untypedfield.textContent = untyped;
 };
-createText();
 
 
 //キー入力の判定
@@ -65,7 +66,26 @@ const rankCheck = score => {};
 const gameOver = id => {};
 
 //カウントダウンタイマー
-const timer = () => {};
+const timer = () => {
+    let time = 60;
+    
+    const id = setInterval(() => {
+        if(time<=0){
+            clearInterval(id);
+        }
+    count.textContent = time--;
+    },1000);
+};
 
-//キーボードの処理
-document.addEventListener('keypress', keyPress);
+//ゲームスタート時の処理
+start.addEventListener('click',()=>{
+    timer();
+    createText();
+    //キーボードの処理
+    document.addEventListener('keypress', keyPress);
+    //スタートボタンを非表示にする
+    start.style.display = 'none';
+});
+
+//スタートしていないときの画面
+untypedfield.textContent = 'スタートボタンで開始';
