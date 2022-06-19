@@ -1,8 +1,10 @@
 //変数の初期化
 let untyped = '';
+let typed = '';
 
 //必要なHTML要素の取得
 const untypedfield = document.getElementById('untyped');
+const typedfield = document.getElementById('typed');
 
 //複数のテキストを格納する配列
 const textLists = [
@@ -31,7 +33,12 @@ const createText = () => {
 createText();
 
 //キー入力の判定
-const keyPress = e => {};
+ const keyPress = e => {
+     typed += untyped.substring(0,1);
+     untyped = untyped.substring(1);
+     typedfield.textContent = typed;
+     untypedfield.textContent = untyped;
+ };
 
 //タイピングスキルのランクを判定
 const rankCheck = score => {};
@@ -41,3 +48,6 @@ const gameOver = id => {};
 
 //カウントダウンタイマー
 const timer = () => {};
+
+//キーボードの処理
+document.addEventListener('keypress', keyPress);
